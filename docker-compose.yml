@@ -1,0 +1,48 @@
+version: '2'
+services:
+    db: 
+        image: mysql:5.7
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+            MYSQL_DATABASE: app
+            MYSQL_USER: user
+            MYSQL_PASSWORD: password
+        ports:
+            - "127.0.0.1:3307:3306"
+    redis:
+        image: redis:5-alpine
+        command: redis-server
+        restart: always
+        ports:
+            - "6380:6379"
+    rabbitmq:
+        image: rabbitmq:3.9-management-alpine
+        restart: always
+        ports:
+            - 5673:5672
+            - 15673:15672
+    app: 
+        build: .
+        command:  bundle exec rails s -p 3000 -b '0.0.0.0'
+        #  
+        # command: bash -c "rm /app/tmp/pids/server.pid && rails s -b 0.0.0.0"
+        volumes: 
+            - ".:/app"
+        ports: 
+            - "3001:3000"
+        depends_on:
+            - db
+            - redis
+            - rabbitmq
+        links:
+            - db
+            - redis
+            - rabbitmq
+        environment:
+          DB_USER: root
+          DB_NAME: app
+          DB_PASSWORD: password
+          DB_HOST: db
+          REDIS_HOST: redis
+          RABBITMQ_HOST: rabbitmq
