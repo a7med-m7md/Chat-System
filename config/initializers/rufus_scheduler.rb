@@ -2,7 +2,7 @@ require 'rufus-scheduler'
 
 scheduler = Rufus::Scheduler.new
 
-scheduler.every '10s' do
+scheduler.every '45m' do
     Application.all.each do |application|
         application.chats_count = application.chat.count
         application.save
