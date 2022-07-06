@@ -1,3 +1,4 @@
+require 'redis_handler'
 class MessagesController < ApplicationController
   before_action :app_chat_id
   # before_action :set_message, only: [:show, :update, :destroy]
@@ -10,10 +11,35 @@ class MessagesController < ApplicationController
   # end
 
   # GET /messages/:application_id/:number
-  def show
+  def index
     @message = Message.where(chat_id: @chat[:id])
     render json: @message
   end
+
+  # GET /messages/search?keyword=val
+  def search
+    begin
+      @messages = Message.chat_search(params[:keyword], @chat[:id])
+    rescue StandardError
+      render :json => []
+    else
+      render json: @messages.as_json(:except => [:id, :chat_id])
+    end
+  end
+
+
+  # def search
+  #   @message = Message.search_(query: params[:content])
+  #   render json: @messages.as_json
+  #   # begin
+      
+  #   # rescue StandardError
+  #   #   render :json => StandardError
+  #   # else
+      
+  #   # end
+  # end
+
 
   # POST /messages
   def create
@@ -23,7 +49,7 @@ class MessagesController < ApplicationController
       redis_handler = RedisHandler.new
       @messages_number = redis_handler.incr_key(@chat[:id])
     
-      render json:{"number of messages": @messages_number}, status: :created, location: @message
+      render json:{"number of messages": @messages_number}, status: :created
     else
       render json: @message.errors, status: :unprocessable_entity
     end
@@ -56,7 +82,7 @@ class MessagesController < ApplicationController
 
     def app_chat_id
       @application_chat = Application.where(token: params[:application_id]).first
-      @chat = Chat.where(application_id: @application_chat[:id],number: params[:number]).first
+      @chat = Chat.where(application_id: @application_chat[:id],number: params[:chat_id].to_i).first
     end
-
+    
 end

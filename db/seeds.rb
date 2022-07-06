@@ -5,3 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Message.__elasticsearch__.create_index!(force: true)
+Message.__elasticsearch__.refresh_index!
+Message.import

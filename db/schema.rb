@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20220703235659) do
 
-  create_table "applications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "applications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "token"
     t.integer  "chats_count"
     t.string   "name"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20220703235659) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "chats", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "chats", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "messages_count"
     t.integer  "application_id"
     t.integer  "number"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20220703235659) do
     t.index ["application_id"], name: "index_chats_on_application_id", using: :btree
   end
 
-  create_table "messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.text     "content",    limit: 65535
     t.integer  "chat_id"
     t.bigint   "number",                   null: false

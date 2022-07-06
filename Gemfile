@@ -15,7 +15,11 @@ gem 'puma', '~> 3.0'
 gem 'redis'
 gem 'redis-namespace'
 gem 'redis-rails'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
+gem 'rufus-scheduler'
 gem 'bunny'
+# gem 'whenever', require: false
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
