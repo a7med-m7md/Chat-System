@@ -22,7 +22,7 @@ It's a simple REST API application it has some applications and each application
 
 
 
-**Creating application**
+### **Creating application**
 `http://localhost:3001/applications/`
 ### request 
 `curl http://localhost:3001/applications/
@@ -51,7 +51,7 @@ It's a simple REST API application it has some applications and each application
         "updated_at": "2022-07-06T06:41:06.000Z"
     }]
 
-**Retrieving all applications** `http://localhost:3001/applications/`
+### **Retrieving all applications** `http://localhost:3001/applications/`
 ### request 
 ` curl -X POST http://localhost:3001/applications/
    -H "Content-Type: application/json"
@@ -66,7 +66,7 @@ It's a simple REST API application it has some applications and each application
         "updated_at": "2022-07-08T04:59:12.000Z"
     }]
 
-**Get specific application** `http://localhost:3001/applications/:token`
+### **Get specific application** `http://localhost:3001/applications/:token`
 #### request
 `curl http://localhost:3001/applications/61c73fb3cec546e016b43ff6c05bafb5bf90cdce
    -H "Accept: application/json" `
@@ -80,7 +80,7 @@ It's a simple REST API application it has some applications and each application
             "updated_at": "2022-07-08T03:32:37.000Z"
         }]
 
-**Update name of specific application** `http://localhost:3001/applications/:token`
+### **Update name of specific application** `http://localhost:3001/applications/:token`
 ### request
 `curl -X PATCH http://localhost:3001/applications/61c73fb3cec546e016b43ff6c05bafb5bf90cdce
      -H 'Content-Type: application/json'
@@ -97,7 +97,7 @@ It's a simple REST API application it has some applications and each application
     }]
 
 
-**Retreiving all chats of specified token** `http://localhost:3001/applications/:token/chats`
+### **Retreiving all chats of specified token** `http://localhost:3001/applications/:token/chats`
 ### request
 `curl http://localhost:3001/applications/61c73fb3cec546e016b43ff6c05bafb5bf90cdce/chats
    -H "Accept: application/json" `
@@ -116,7 +116,7 @@ It's a simple REST API application it has some applications and each application
         "updated_at": "2022-07-08T03:40:06.000Z"
     }]
 
-**Create new chat belongs to a specific token** `http://localhost:3001/applications/:token/chats/`
+### **Create new chat belongs to a specific token** `http://localhost:3001/applications/:token/chats/`
 ### request 
 ` curl -X POST http://localhost:3001/applications/61c73fb3cec546e016b43ff6c05bafb5bf90cdce/chats/
    -H "Content-Type: application/json"
@@ -127,7 +127,7 @@ It's a simple REST API application it has some applications and each application
         "number of chats": 5
     }]
 
-**Getting info about specific chat with its number and token** `http://localhost:3001/applications/:token/chats/:number`
+### **Getting info about specific chat with its number and token** `http://localhost:3001/applications/:token/chats/:number`
 ### request
 `curl http://localhost:3001/applications/61c73fb3cec546e016b43ff6c05bafb5bf90cdce/chats/30
    -H "Accept: application/json" `
@@ -140,7 +140,7 @@ It's a simple REST API application it has some applications and each application
         "updated_at": "2022-07-06T06:32:13.000Z"
     }]
 
-**Getting all messages belongs to specific chat and token**`http://localhost:3001/applications/:token/chats/:number/messages`
+### **Getting all messages belongs to specific chat and token**`http://localhost:3001/applications/:token/chats/:number/messages`
 ### request 
 ` curl http://localhost:3001/applications/61c73fb3cec546e016b43ff6c05bafb5bf90cdce/chats/30/messages
    -H "Content-Type: application/json"  `
@@ -165,7 +165,7 @@ It's a simple REST API application it has some applications and each application
         "updated_at": "2022-07-06T04:45:10.000Z"
     }]
 
-**Send a specific message into specific chat and token**`http://localhost:3001/applications/:token/chats/:number/messages`
+### **Send a specific message into specific chat and token**`http://localhost:3001/applications/:token/chats/:number/messages`
 ### request
 ` curl -X POST http://localhost:3001/applications/61c73fb3cec546e016b43ff6c05bafb5bf90cdce/chats/30/messages
    -H "Content-Type: application/json"
@@ -176,7 +176,7 @@ It's a simple REST API application it has some applications and each application
         "number of messages": 4
     }]
 
-**Searching for a partial content of message inside a specific chat**`http://localhost:3001/applications/:token/chats/:number/messages/search?keyword=VALUE`
+### **Searching for a partial content of message inside a specific chat**`http://localhost:3001/applications/:token/chats/:number/messages/search?keyword=VALUE`
 ### request 
 ` curl http://localhost:3001/applications/61c73fb3cec546e016b43ff6c05bafb5bf90cdce/chats/30/messages/search?keyword=f
    -H "Content-Type: application/json"  `
