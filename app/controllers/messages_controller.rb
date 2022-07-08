@@ -45,13 +45,13 @@ class MessagesController < ApplicationController
   def create
     # @message = Message.new(chat_id: @chat[:id], content: params[:content], number:  params[:number])
 
-    publisher = PublishHandler.new
-    publisher.send_message($messageQueue, 
-                {chat_id: @chat[:id], content: params[:content], number:  params[:number]})
-
     redis_handler = RedisHandler.new
     @messages_number = redis_handler.incr_key(@chat[:id])
-              
+
+    publisher = PublishHandler.new
+    publisher.send_message($messageQueue, 
+                {chat_id: @chat[:id], content: params[:content], number:  @messages_number})
+
     render json:{"number of messages": @messages_number}, status: :created
 
    

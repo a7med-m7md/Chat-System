@@ -4,16 +4,15 @@ require 'publisher'
 class ChatsController < ApplicationController
   before_action :app_id
   before_action :set_chat, only: [:show, :update]
-  # before_action :set_chats_number, only: [:create]
 
-  # # GET /chats/:application_id
-  # def index
-  #   ######################################################
-  #   ########### return all except id, application_id #####
-  #   ######################################################
-  #   @chats = Chat.where(application_id: @application_chat[:id])
-  #   render json: @chats.as_json(:except => [:id, :application_id])
-  # end
+  # GET /chats/
+  def index
+    ######################################################
+    ########### return all except id, application_id #####
+    ######################################################
+    @chats = Chat.where(application_id: @application_chat[:id])
+    render json: @chats.as_json(:except => [:id, :application_id])
+  end
 
   # GET /chats/token/number
   # GET /chats/08f9e12f43b0e1afb15a633dd9e4c2e2f68de91d/64
