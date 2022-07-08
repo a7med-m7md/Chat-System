@@ -27,7 +27,21 @@ It's a simple REST API application it has some applications and each application
 ### request 
 `curl http://localhost:3001/applications/
    -H "Accept: application/json" `
+### response
+    [{
+        "token": "8a89ec464db041a4d0c2ec230f187016849f1da6",
+        "chats_count": 0,
+        "name": "Mahmoud",
+        "created_at": "2022-07-08T04:59:12.000Z",
+        "updated_at": "2022-07-08T04:59:12.000Z"
+    }]
 
+### **Retrieving all applications** 
+[http://localhost:3001/applications/](http://localhost:3001/applications/)
+### request 
+` curl -X POST http://localhost:3001/applications/
+   -H "Content-Type: application/json"
+   -d '{"name": "Mahmoud"}'   `
 ### response
     [{
         "token": "61c73fb3cec546e016b43ff6c05bafb5bf90cdce",
@@ -49,22 +63,6 @@ It's a simple REST API application it has some applications and each application
         "name": "aya",
         "created_at": "2022-07-06T00:27:20.000Z",
         "updated_at": "2022-07-06T06:41:06.000Z"
-    }]
-
-### **Retrieving all applications** 
-[http://localhost:3001/applications/](http://localhost:3001/applications/)
-### request 
-` curl -X POST http://localhost:3001/applications/
-   -H "Content-Type: application/json"
-   -d '{"name": "Mahmoud"}'   `
-
-### response
-    [{
-        "token": "8a89ec464db041a4d0c2ec230f187016849f1da6",
-        "chats_count": 0,
-        "name": "Mahmoud",
-        "created_at": "2022-07-08T04:59:12.000Z",
-        "updated_at": "2022-07-08T04:59:12.000Z"
     }]
 
 ### **Get specific application** 
@@ -185,7 +183,7 @@ It's a simple REST API application it has some applications and each application
     }]
 
 ### **Searching for a partial content of message inside a specific chat**
-[http://localhost:3001/applications/:token/chats/:number/messages/search?keyword=VALUE`](http://localhost:3001/applications/:token/chats/:number/messages/search?keyword=VALUE)
+[http://localhost:3001/applications/:token/chats/:number/messages/search?keyword=VALUE](http://localhost:3001/applications/:token/chats/:number/messages/search?keyword=VALUE)
 ### request 
 ` curl http://localhost:3001/applications/61c73fb3cec546e016b43ff6c05bafb5bf90cdce/chats/30/messages/search?keyword=f
    -H "Content-Type: application/json"  `
