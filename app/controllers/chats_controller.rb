@@ -10,8 +10,8 @@ class ChatsController < ApplicationController
     ######################################################
     ########### return all except id, application_id #####
     ######################################################
-    @chats = Chat.where(application_id: @application_chat[:id])
-    render json: @chats.as_json(:except => [:id, :application_id])
+    @chats = Chat.where(application_id: @application_chat[:id]).all.as_json(:except => [:id, :application_id])
+    render json: @chats
   end
 
   # GET /chats/token/number
@@ -38,7 +38,7 @@ class ChatsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_chat
-      @chat = Chat.where(number: params[:number], application_id: @application_chat[:id]).first
+      @chat = Chat.where(number: params[:id], application_id: @application_chat[:id]).first
     end
 
     # def set_chats_number

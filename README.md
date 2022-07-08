@@ -21,16 +21,13 @@ It's a simple REST API application it has some applications and each application
 | /applications/:token/chats/:number/messages/search?keyword=value | GET |  Get all the partially matched values inside a specific chat |
 
 
-## Application
 
-request 
-
+**Creating application**
+### request 
 `curl http://localhost:3001/applications/
    -H "Accept: application/json" `
 
-response
-
-
+### response
     [{
         "token": "61c73fb3cec546e016b43ff6c05bafb5bf90cdce",
         "chats_count": 1,
@@ -53,15 +50,13 @@ response
         "updated_at": "2022-07-06T06:41:06.000Z"
     }]
 
-
-request 
-
+**Retrieving all applications**
+### request 
 ` curl -X POST http://localhost:3001/applications/
    -H "Content-Type: application/json"
    -d '{"name": "Mahmoud"}'   `
 
-response
-
+### response
     [{
         "token": "8a89ec464db041a4d0c2ec230f187016849f1da6",
         "chats_count": 0,
@@ -70,13 +65,12 @@ response
         "updated_at": "2022-07-08T04:59:12.000Z"
     }]
 
-request
-
+**Get specific application**
+#### request
 `curl http://localhost:3001/applications/61c73fb3cec546e016b43ff6c05bafb5bf90cdce
    -H "Accept: application/json" `
 
-response 
-
+### response 
         [{
             "token": "61c73fb3cec546e016b43ff6c05bafb5bf90cdce",
             "chats_count": 1,
@@ -85,15 +79,14 @@ response
             "updated_at": "2022-07-08T03:32:37.000Z"
         }]
 
-request
-
+**Update name of specific application**
+### request
 `curl -X PATCH http://localhost:3001/applications/61c73fb3cec546e016b43ff6c05bafb5bf90cdce
      -H 'Content-Type: application/json'
      -H 'Accept: application/json'
      -d '{"name": "Ahmed Mohamed"}'`
 
-response
-
+### response
     [{
         "name": "Ahmed Mohamed",
         "token": "61c73fb3cec546e016b43ff6c05bafb5bf90cdce",
@@ -103,14 +96,12 @@ response
     }]
 
 
-request
-
-
+**Retreiving all chats of specified token**
+### request
 `curl http://localhost:3001/applications/61c73fb3cec546e016b43ff6c05bafb5bf90cdce/chats
    -H "Accept: application/json" `
 
-response
-
+#### response
     [{
         "messages_count": 3,
         "number": 30,
@@ -124,44 +115,29 @@ response
         "updated_at": "2022-07-08T03:40:06.000Z"
     }]
 
-
-request 
-
+**Create new chat belongs to a specific token**
+### request 
 ` curl -X POST http://localhost:3001/applications/61c73fb3cec546e016b43ff6c05bafb5bf90cdce/chats/
    -H "Content-Type: application/json"
    -d '{"number": 56}'   `
 
-response
-
+### response
     [{
         "number of chats": 5
     }]
 
-
-request
-
-`curl http://localhost:3001/applications/61c73fb3cec546e016b43ff6c05bafb5bf90cdce/chats/
+**Getting info about specific chat with its number and token**
+### request
+`curl http://localhost:3001/applications/61c73fb3cec546e016b43ff6c05bafb5bf90cdce/chats/30
    -H "Accept: application/json" `
 
-response
+### response
 
     [{
         "messages_count": 3,
         "number": 30,
         "created_at": "2022-07-06T03:49:25.000Z",
         "updated_at": "2022-07-06T06:32:13.000Z"
-    },
-    {
-        "messages_count": 0,
-        "number": 80,
-        "created_at": "2022-07-08T03:40:06.000Z",
-        "updated_at": "2022-07-08T03:40:06.000Z"
-    },
-    {
-        "messages_count": 0,
-        "number": 56,
-        "created_at": "2022-07-08T05:09:53.000Z",
-        "updated_at": "2022-07-08T05:09:53.000Z"
     }]
 
 
