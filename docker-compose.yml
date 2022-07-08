@@ -36,6 +36,7 @@ services:
         ports:
             - 5673:5672
             - 15673:15672
+
     app:
         build: .
         command: bundle exec rails s -p 3000 -b '0.0.0.0'
@@ -63,3 +64,36 @@ services:
             REDIS_HOST: redis
             RABBITMQ_HOST: rabbitmq
             ES_HOST: elasticsearch
+    chatworker:
+        build: .
+        command: rake sneakers:run
+        volumes:
+            - .:/app
+        depends_on:
+            - db
+            - rabbitmq
+        restart: always
+        environment:
+            DB_USER: root
+            DB_NAME: app
+            DB_PASSWORD: password
+            DB_HOST: db
+            RABBITMQ_HOST: rabbitmq
+            WORKERS: ProcessorChat
+
+    messageworker:
+        build: .
+        command: rake sneakers:run
+        volumes:
+            - .:/app
+        depends_on:
+            - db
+            - rabbitmq
+        restart: always
+        environment:
+            DB_USER: root
+            DB_NAME: app
+            DB_PASSWORD: password
+            DB_HOST: db
+            RABBITMQ_HOST: rabbitmq
+            WORKERS: ProcessorMessage

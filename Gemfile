@@ -18,7 +18,10 @@ gem 'redis-rails'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 gem 'rufus-scheduler'
-gem 'bunny'
+gem 'bunny', '~> 2.11'
+gem 'sneakers'
+gem 'json'
+
 # gem 'whenever', require: false
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'

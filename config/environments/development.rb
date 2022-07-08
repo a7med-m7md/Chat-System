@@ -1,3 +1,5 @@
+require "active_support/core_ext/integer/time"
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -38,6 +40,16 @@ Rails.application.configure do
   config.active_record.migration_error = :page_load
 
 
+    # Raise exceptions for disallowed deprecations.
+    config.active_support.disallowed_deprecation = :raise
+
+    # Tell Active Support which deprecation messages to disallow.
+    config.active_support.disallowed_deprecation_warnings = []
+  
+    # Highlight code that triggered database queries in logs.
+    # config.active_record.verbose_query_logs = true
+
+    
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 

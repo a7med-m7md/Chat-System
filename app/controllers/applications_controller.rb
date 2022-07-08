@@ -5,23 +5,22 @@ class ApplicationsController < ApplicationController
   # GET /applications
   # return all the application model content except id field
   def index
-    @applications = Application.all   #.as_json(:except=> :id)
- 
+    @applications = Application.all.as_json(:except=> :id)
     render json: @applications
   end
-
-  # GET /applications/1
+  
+  # GET /applications/:token
+  # GET /applications/61c73fb3cec546e016b43ff6c05bafb5bf90cdce
   def show
-    render json: @application.as_json(:except=> :id)
+    render json: @application.as_json(:except => :id)
   end
 
   # POST /applications
   # put the generated token and the name from request body 
   def create
     @application = Application.new(token: @random_token, name: params[:name])
-
     if @application.save
-      render json: @application, status: :created, location: @application
+      render json: @application.as_json(:except => :id), status: :created, location: @application
     else
       render json: @application.errors, status: :unprocessable_entity
     end
@@ -36,10 +35,6 @@ class ApplicationsController < ApplicationController
     end
   end
 
-  # # DELETE /applications/1
-  # def destroy
-  #   @application.destroy
-  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

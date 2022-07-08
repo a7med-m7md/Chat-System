@@ -1,66 +1,40 @@
 require 'redis_handler'
+require 'publisher'
+
 class ChatsController < ApplicationController
   before_action :app_id
   before_action :set_chat, only: [:show, :update]
   # before_action :set_chats_number, only: [:create]
 
-  # GET /chats/:application_id
-  def index
-    ######################################################
-    ########### return all except id, application_id #####
-    ######################################################
-    print @application_chat
-    @chats = Chat.where(application_id: @application_chat[:id])
-
-    render json: @chats
-  end
+  # # GET /chats/:application_id
+  # def index
+  #   ######################################################
+  #   ########### return all except id, application_id #####
+  #   ######################################################
+  #   @chats = Chat.where(application_id: @application_chat[:id])
+  #   render json: @chats.as_json(:except => [:id, :application_id])
+  # end
 
   # GET /chats/token/number
   # GET /chats/08f9e12f43b0e1afb15a633dd9e4c2e2f68de91d/64
   def show
-    render json: @chat
+    render json: @chat.as_json(:except => [:id, :application_id])
   end
 
   # POST /chats/
   def create
-    @chat = Chat.new(number: params[:number], application_id: @application_chat[:id])
-    ######################################################
-    ######### return number of chats #####################
-    ######################################################
-    
-  
+    # @chat = Chat.new(number: params[:number], application_id: @application_chat[:id])
 
-    # content = {
-    #   number: @chats_number,
-    #   application_id: @application_chat[:id]
-    # }
-    # handler = PublishHandler.new
-    # handler.send_message($chatQueueName, content)
-
+    publisher = PublishHandler.new
+    publisher.send_message(
+      $chatQueue, {number: params[:number], application_id: @application_chat[:id]}
+    )
+    redis_handler = RedisHandler.new
+    @chats_number = redis_handler.incr_key(@application_chat[:token])
   
-    if @chat.save
-      redis_handler = RedisHandler.new
-      @chats_number = redis_handler.incr_key(@application_chat[:token])
-    
-      render json:{"number of chats": @chats_number}, status: :created
-    else
-      render json: @chat.errors, status: :unprocessable_entity
-    end
+    render json:{"number of chats": @chats_number}, status: :created
   end
 
-  # # PATCH/PUT /chats/1
-  # def update
-  #   if @chat.update(@chats)
-  #     render json: @chat
-  #   else
-  #     render json: @chat.errors, status: :unprocessable_entity
-  #   end
-  # end
-
-  # DELETE /chats/1
-  # def destroy
-  #   @chat.destroy
-  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -79,7 +53,7 @@ class ChatsController < ApplicationController
     end
 
     def app_id
-      print params
+      # print params
       @application_chat = Application.where(token: params[:application_id]).first
     end
 end
