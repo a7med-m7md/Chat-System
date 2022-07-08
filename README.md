@@ -25,8 +25,9 @@ It's a simple REST API application it has some applications and each application
 ### **Creating application**
 [http://localhost:3001/applications/](http://localhost:3001/applications/)
 ### request 
-`curl http://localhost:3001/applications/
-   -H "Accept: application/json" `
+` curl -X POST http://localhost:3001/applications/
+   -H "Content-Type: application/json"
+   -d '{"name": "Mahmoud"}'   `
 ### response
     [{
         "token": "8a89ec464db041a4d0c2ec230f187016849f1da6",
@@ -39,9 +40,8 @@ It's a simple REST API application it has some applications and each application
 ### **Retrieving all applications** 
 [http://localhost:3001/applications/](http://localhost:3001/applications/)
 ### request 
-` curl -X POST http://localhost:3001/applications/
-   -H "Content-Type: application/json"
-   -d '{"name": "Mahmoud"}'   `
+`curl http://localhost:3001/applications/
+   -H "Accept: application/json" `
 ### response
     [{
         "token": "61c73fb3cec546e016b43ff6c05bafb5bf90cdce",
